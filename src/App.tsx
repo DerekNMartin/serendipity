@@ -41,8 +41,8 @@ function App() {
   const [list, setList] = useState<ListItem[]>(defaultList);
   return (
     <>
-      <main className="grid grid-cols-[0.2fr_1fr] grid-flow-col max-h-screen h-screen">
-        <section className="h-full overflow-y-auto border-r border-solid border-neutral-400">
+      <main className="grid grid-cols-[0.2fr_1fr] grid-flow-col max-h-screen bg-yellow-300">
+        <section className="max-h-screen h-screen p-8">
           <ChooseList list={list} updateList={setList} />
         </section>
         <section className="flex justify-center">

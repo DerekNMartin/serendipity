@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Button } from './Button';
+import { Input } from './Input';
 
 export type ListItem = {
   id: string;
@@ -36,21 +37,24 @@ export function ChooseList({ list, updateList }: ChooserListProps) {
 
   function ItemImage({ imageSrc }: { imageSrc?: string }) {
     return imageSrc ? (
-      <img src={imageSrc} className="rounded-2xl w-full h-96 object-cover" />
+      <img
+        src={imageSrc}
+        className="rounded-2xl w-full h-96 object-cover border-3 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-shadow"
+      />
     ) : (
       <div className="bg-neutral-200 rounded-2xl w-full h-96" />
     );
   }
 
   return (
-    <div className="flex flex-col p-6 gap-6">
+    <div className="flex flex-col p-6 gap-6 overflow-y-auto overflow-x-clip h-full w-full border-3 border-solid border-black rounded-md bg-white shadow-[8px_8px_0px_rgba(0,0,0,1)]">
       <section className="flex justify-center">
         <div className="flex gap-2 w-full">
-          <input
+          <Input
             type="text"
             value={input}
             onChange={handleInput}
-            className="border border-solid border-neutral-300 rounded px-2 w-full"
+            className="w-full"
           />
           <Button onClick={addToList}>Add</Button>
         </div>
@@ -73,9 +77,7 @@ export function ChooseList({ list, updateList }: ChooserListProps) {
                   onClick={() => removeFromList(item.id)}
                 />
               </div>
-              <h3 className="text-center font-bold mt-2 text-sm">
-                {item.title}
-              </h3>
+              <p className="text-center font-bold mt-2">{item.title}</p>
             </motion.article>
           ))}
         </AnimatePresence>

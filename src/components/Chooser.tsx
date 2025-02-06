@@ -10,15 +10,16 @@ export type ChooserProps = {
 export function Chooser({ list }: ChooserProps) {
   const [cycleList, setCycleList] = useState(list);
   const [isChoosing, setIsChoosing] = useState(false);
+  const [chosenItem, setChosenItem] = useState<ListItem | null>(null);
   const slotRef = useRef<HTMLDivElement>(null);
   const chosenElement = useRef<HTMLElement | null>(null);
-  const [chosenItem, setChosenItem] = useState<ListItem>();
   const controls = useAnimation();
 
   useEffect(() => setCycleList(list), [list]);
 
   async function resetChosen() {
     if (chosenElement.current) {
+      setChosenItem(null);
       await animate(
         chosenElement.current,
         {
@@ -42,7 +43,7 @@ export function Chooser({ list }: ChooserProps) {
         y: '-100%',
         transition: {
           duration: delay / 1000,
-          ease: 'circOut',
+          ease: 'linear',
         },
       });
       setCycleList((prev) => {
@@ -85,22 +86,29 @@ export function Chooser({ list }: ChooserProps) {
 
   return (
     <div className="flex items-center justify-center flex-col w-fit">
-      <section className="relative w-[350px] h-[537px] overflow-hidden rounded-2xl">
+      <section className="overflow-hidden rounded-md border-3 border-solid border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] flex justify-center items-center bg-green-400 p-12">
         <motion.div
-          className="absolute w-full h-full flex flex-col gap-4"
+          className="w-[350px] h-[540px] flex flex-col gap-4"
           ref={slotRef}
           animate={controls}
         >
-          {cycleList.map((item) => (
-            <motion.img
-              key={item.id}
-              data-id={item.id}
-              src={item.image}
-              className="w-full h-full object-cover rounded-2xl"
-              exit={{ opacity: 0 }}
-              layout={isChoosing ? false : true}
-            />
-          ))}
+          <AnimatePresence>
+            {cycleList.map((item) => (
+              <motion.img
+                key={item.id}
+                data-id={item.id}
+                src={item.image}
+                className={`w-full h-full object-cover rounded-2xl border-3 border-solid border-black ${
+                  item.id === chosenItem?.id
+                    ? 'shadow-[8px_8px_0px_rgba(0,0,0,1)]'
+                    : ''
+                }`}
+                exit={{ opacity: 0 }}
+                layout={isChoosing ? false : true}
+                onClick={resetChosen}
+              />
+            ))}
+          </AnimatePresence>
         </motion.div>
       </section>
       <Button className="mt-40 w-full" onClick={roll}>
