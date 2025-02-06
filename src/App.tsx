@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import type { ListItem } from './components/ChooseList';
+
 import { Chooser } from './components/Chooser';
+import { ChooseList } from './components/ChooseList';
+import { useState } from 'react';
 
 const defaultList = [
   {
@@ -35,31 +38,14 @@ const defaultList = [
 ];
 
 function App() {
-  const [list, setList] = useState(defaultList);
-
-  const List = () => {
-    return (
-      <ul className="flex flex-col gap-6 p-6">
-        {list.map((item) => (
-          <article key={item.id} className="w-full max-w-28">
-            <img
-              src={item.image}
-              className="rounded-2xl w-full h-full object-contain"
-            />
-            <h3 className="text-center font-bold mt-2">{item.title}</h3>
-          </article>
-        ))}
-      </ul>
-    );
-  };
-
+  const [list, setList] = useState<ListItem[]>(defaultList);
   return (
     <>
       <main className="grid grid-cols-[0.2fr_1fr] grid-flow-col max-h-screen h-screen">
         <section className="h-full overflow-y-auto border-r border-solid border-neutral-400">
-          <List />
+          <ChooseList list={list} updateList={setList} />
         </section>
-        <section className="flex flex-col justify-center">
+        <section className="flex justify-center">
           <Chooser list={list} />
         </section>
       </main>
