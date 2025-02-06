@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Button } from './Button';
 
 export type ListItem = {
   id: string;
@@ -51,12 +52,7 @@ export function ChooseList({ list, updateList }: ChooserListProps) {
             onChange={handleInput}
             className="border border-solid border-neutral-300 rounded px-2 w-full"
           />
-          <button
-            className="bg-black rounded text-white p-2 px-3 text-sm"
-            onClick={addToList}
-          >
-            Add
-          </button>
+          <Button onClick={addToList}>Add</Button>
         </div>
       </section>
       <ul className="flex flex-col gap-6 items-center">

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, animate, useAnimation, AnimatePresence } from 'motion/react';
 import type { ListItem } from './ChooseList';
+import { Button } from './Button';
 
 export type ChooserProps = {
   list: ListItem[];
@@ -102,12 +103,9 @@ export function Chooser({ list }: ChooserProps) {
           ))}
         </motion.div>
       </section>
-      <button
-        className="bg-black rounded py-2 px-4 text-white text-sm font-bold hover:cursor-pointer mt-40 w-full"
-        onClick={roll}
-      >
+      <Button className="mt-40 w-full" onClick={roll}>
         {isChoosing ? 'Choosing...' : 'Choose'}
-      </button>
+      </Button>
     </div>
   );
 }
