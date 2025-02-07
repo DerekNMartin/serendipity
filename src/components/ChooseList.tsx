@@ -27,7 +27,8 @@ export function ChooseList({ list, updateList }: ChooserListProps) {
       title: input,
       image: '',
     };
-    updateList([...list, newItem]);
+    updateList((prevList) => [...prevList, newItem]);
+    setInput('');
   }
 
   function removeFromList(itemId: string) {
@@ -42,7 +43,7 @@ export function ChooseList({ list, updateList }: ChooserListProps) {
         className="rounded-2xl w-full h-96 object-cover border-3 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-shadow"
       />
     ) : (
-      <div className="bg-neutral-200 rounded-2xl w-full h-96" />
+      <div className="bg-blue-600 rounded-2xl w-full h-96" />
     );
   }
 

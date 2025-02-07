@@ -112,7 +112,7 @@ export function Chooser({ list }: ChooserProps) {
         </motion.div>
       </section>
       <Button className="mt-40 w-full" onClick={roll}>
-        {isChoosing ? 'Choosing...' : 'Choose'}
+        {isChoosing ? 'Choosing...' : 'Choose for me!'}
       </Button>
     </div>
   );
