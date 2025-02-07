@@ -1,54 +1,27 @@
 import type { ListItem } from './components/ChooseList';
 
+import { useState } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import { Chooser } from './components/Chooser';
 import { ChooseList } from './components/ChooseList';
-import { useState } from 'react';
 
-const defaultList = [
-  {
-    id: '1',
-    title: 'The Secret History',
-    image:
-      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1451554846i/29044.jpg',
-  },
-  {
-    id: '2',
-    title: 'East of Eden',
-    image:
-      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1639969375i/4406.jpg',
-  },
-  {
-    id: '3',
-    title: 'The Well of Ascension',
-    image:
-      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1619538925i/68429.jpg',
-  },
-  {
-    id: '4',
-    title: 'Starter Villain',
-    image:
-      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1683564155i/61885029.jpg',
-  },
-  {
-    id: '5',
-    title: 'Billy Summers',
-    image:
-      'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1618151020i/56852407.jpg',
-  },
-];
+const queryClient = new QueryClient();
 
 function App() {
-  const [list, setList] = useState<ListItem[]>(defaultList);
+  const [list, setList] = useState<ListItem[]>([]);
   return (
     <>
-      <main className="grid grid-cols-[0.2fr_1fr] grid-flow-col max-h-screen bg-yellow-300">
-        <section className="max-h-screen h-screen p-8">
-          <ChooseList list={list} updateList={setList} />
-        </section>
-        <section className="flex justify-center">
-          <Chooser list={list} />
-        </section>
-      </main>
+      <QueryClientProvider client={queryClient}>
+        <main className="grid grid-cols-[0.3fr_1fr] grid-flow-col max-h-screen h-screen bg-yellow-300">
+          <section className="max-h-screen h-full p-8">
+            <ChooseList list={list} updateList={setList} />
+          </section>
+          <section className="flex justify-center">
+            <Chooser list={list} />
+          </section>
+        </main>
+      </QueryClientProvider>
     </>
   );
 }

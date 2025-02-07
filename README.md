@@ -19,3 +19,11 @@ You can deploy your new Vite project with a single command from your terminal us
 ```shell
 $ vercel
 ```
+
+## Resources:
+
+https://emilkowal.ski/ui/great-animations#great-animations-feel-natural
+
+https://motion.dev/docs/react-animation
+
+https://dribbble.com/shots/20764973-Neobrutalism-UI-How-to
