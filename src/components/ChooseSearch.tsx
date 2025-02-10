@@ -28,9 +28,8 @@ export function ChooseSearch({
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  const { data, isPending } = useQuery({
+  const { data, isFetching } = useQuery({
     enabled: Boolean(debouncedSearchTerm),
-    placeholderData: keepPreviousData,
     queryKey: ['openLibrarySearch', debouncedSearchTerm],
     queryFn: () =>
       searchOpenLibrary({ q: debouncedSearchTerm, page: 1, limit: 5 }),
@@ -45,9 +44,6 @@ export function ChooseSearch({
     },
   });
 
-  const showResultDropdown =
-    data?.length && searchTerm && inputHasFocus && !isPending;
-
   function handleInput(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchTerm(event.target.value);
   }
@@ -57,7 +53,9 @@ export function ChooseSearch({
       onSubmit({
         id: item.id,
         title: item.title,
-        image: coverImageUrl(item.cover_edition_key, 'L'),
+        image: item.cover_edition_key
+          ? coverImageUrl(item.cover_edition_key, 'L')
+          : '',
       });
     } else {
       onSubmit(searchTerm);
@@ -76,7 +74,7 @@ export function ChooseSearch({
     );
     return (
       <li
-        className="border-b-3 last:border-b-0 flex gap-2 items-center p-2 hover:bg-fuchsia-400 hover:cursor-pointer"
+        className="border-b-3 last:border-b-0 flex gap-2 items-center p-2 hover:bg-fuchsia-400 hover:cursor-pointer  text-xs"
         onMouseDown={() => handleSubmit(item)}
       >
         {image}
@@ -91,17 +89,18 @@ export function ChooseSearch({
     <div className="flex gap-2 w-full relative">
       <Input
         type="text"
+        className="w-full"
+        placeholder="Search a book title or author..."
         value={searchTerm}
         onChange={handleInput}
-        className="w-full"
         onFocus={() => setInputHasFocus(true)}
         onBlur={() => setInputHasFocus(false)}
       />
-      <Button onClick={() => handleSubmit()}>
+      <Button onClick={() => handleSubmit()} disabled={!searchTerm}>
         <PlusIcon className="text-black w-6 h-6 stroke-[2.5]" />
       </Button>
       <AnimatePresence propagate>
-        {showResultDropdown && (
+        {inputHasFocus && (
           <motion.div
             key="results-dropdown"
             className="absolute border-3 bg-white rounded-md z-10 w-full translate-y-14 origin-top"
@@ -110,10 +109,16 @@ export function ChooseSearch({
             exit={{ scaleY: 0, opacity: 0 }}
             transition={{ type: 'spring', duration: 0.2 }}
           >
-            <ul className="flex flex-col text-xs">
-              {data?.map((result) => (
-                <ResultListItem key={result.id} item={result} />
-              ))}
+            <ul className="flex flex-col">
+              {data?.length ? (
+                data?.map((result) => (
+                  <ResultListItem key={result.id} item={result} />
+                ))
+              ) : (
+                <p className="p-6 text-sm">
+                  {isFetching ? 'Loading...' : 'No options'}
+                </p>
+              )}
             </ul>
           </motion.div>
         )}

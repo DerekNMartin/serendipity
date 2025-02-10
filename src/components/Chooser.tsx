@@ -116,7 +116,7 @@ export function Chooser({ list }: ChooserProps) {
           </AnimatePresence>
         </motion.div>
       </section>
-      <Button className="w-full" onClick={roll}>
+      <Button className="w-full" onClick={roll} disabled={list.length < 2}>
         {isChoosing ? 'Choosing...' : 'Choose for me!'}
       </Button>
     </div>

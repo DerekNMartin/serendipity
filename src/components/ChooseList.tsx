@@ -35,10 +35,10 @@ export function ChooseList({ list, updateList }: ChooserListProps) {
     return item?.image ? (
       <img
         src={item.image}
-        className="rounded object-cover border-3 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-shadow w-full h-full"
+        className="rounded-md object-cover border-3 hover:shadow-[4px_4px_0px_rgba(0,0,0,1)] transition-shadow w-full h-full border-black"
       />
     ) : (
-      <div className="bg-blue-600 rounded text-center text-xs flex justify-center items-center p-1 text-white max-w-full">
+      <div className="bg-blue-600 border-3 border-black rounded-md text-center text-xs flex justify-center items-center p-1 text-white w-full">
         {item?.title}
       </div>
     );
