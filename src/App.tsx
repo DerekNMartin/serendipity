@@ -13,12 +13,12 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <main className="grid grid-cols-[0.3fr_1fr] grid-flow-col max-h-screen h-screen bg-yellow-300">
-          <section className="max-h-screen h-full p-8">
+        <main className="grid lg:grid-cols-[0.4fr_1fr] sm:grid-cols-2 grid-cols-1 sm:grid-flow-col sm:max-h-screen sm:h-screen p-8 gap-8 h-full">
+          <section className="flex flex-col">
             <ChooseList list={list} updateList={setList} />
           </section>
           <section className="flex justify-center">
-            <Chooser list={list} />
+            <Chooser key="chooser" list={list} />
           </section>
         </main>
       </QueryClientProvider>

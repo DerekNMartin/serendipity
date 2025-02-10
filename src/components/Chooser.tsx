@@ -70,7 +70,12 @@ export function Chooser({ list }: ChooserProps) {
       if (item) setChosenItem(item);
       await animate(
         chosenElement.current,
-        { scale: 1.4, width, height, position: 'fixed' },
+        {
+          width,
+          height,
+          position: 'fixed',
+          scale: 1.4,
+        },
         { type: 'spring', duration: 0.3 }
       );
     }
@@ -85,10 +90,10 @@ export function Chooser({ list }: ChooserProps) {
   }
 
   return (
-    <div className="flex items-center justify-center flex-col w-fit">
-      <section className="overflow-hidden rounded-md border-3 border-solid border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] flex justify-center items-center bg-green-400 p-12">
+    <div className="flex items-center sm:justify-center flex-col gap-14 sm:w-auto w-full">
+      <section className="overflow-hidden rounded-md border-3 border-solid border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] flex justify-center items-center bg-green-400 sm:p-12 p-6 w-full">
         <motion.div
-          className="w-[350px] h-[540px] flex flex-col gap-4"
+          className="w-full max-h-96 lg:min-h-96 aspect-[1/1.4] flex flex-col gap-4 relative"
           ref={slotRef}
           animate={controls}
         >
@@ -111,7 +116,7 @@ export function Chooser({ list }: ChooserProps) {
           </AnimatePresence>
         </motion.div>
       </section>
-      <Button className="mt-40 w-full" onClick={roll}>
+      <Button className="w-full" onClick={roll}>
         {isChoosing ? 'Choosing...' : 'Choose for me!'}
       </Button>
     </div>
