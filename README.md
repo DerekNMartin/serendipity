@@ -1,5 +1,7 @@
 # Serendipity 🎲
 
+https://serendipity-wheat.vercel.app/
+
 I always have a hard time choosing what to read next!
 
 Serendipity is a little, animated randomizer built with React, TypeScript, and Framer Motion - it cycles through your options with dynamic motion effects before landing on your fate.
