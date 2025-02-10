@@ -1,29 +1,16 @@
-# React + TypeScript + Vite
+# Serendipity 🎲
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I always have a hard time choosing what to read next!
 
-While this project uses React, Vite supports many popular JS frameworks. [See all the supported frameworks](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+Serendipity is a little, animated randomizer built with React, TypeScript, and Framer Motion - it cycles through your options with dynamic motion effects before landing on your fate.
 
-## Deploy Your Own
+Design is inspired by Neo-Brutalism.
 
-Deploy your own Vite project with Vercel.
+![Screenshot 2025-02-10 at 3 20 29 PM](https://github.com/user-attachments/assets/0395233b-a7d6-4fec-a154-71947fc6beb0)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/examples/tree/main/framework-boilerplates/vite-react&template=vite-react)
-
-_Live Example: https://vite-react-example.vercel.app_
-
-### Deploying From Your Terminal
-
-You can deploy your new Vite project with a single command from your terminal using [Vercel CLI](https://vercel.com/download):
-
-```shell
-$ vercel
-```
 
 ## Resources:
 
-https://emilkowal.ski/ui/great-animations#great-animations-feel-natural
-
-https://motion.dev/docs/react-animation
-
-https://dribbble.com/shots/20764973-Neobrutalism-UI-How-to
+- https://emilkowal.ski/ui/great-animations#great-animations-feel-natural
+- https://motion.dev/docs/react-animation
+- https://dribbble.com/shots/20764973-Neobrutalism-UI-How-to
