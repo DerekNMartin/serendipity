@@ -1,7 +1,7 @@
 import type { ListItem } from './ChooseList';
 
 import { useState } from 'react';
-import { useQuery, keepPreviousData } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { useDebounce } from '@uidotdev/usehooks';
 import { AnimatePresence, motion } from 'motion/react';
 
