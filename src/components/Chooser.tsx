@@ -89,6 +89,37 @@ export function Chooser({ list }: ChooserProps) {
     setIsChoosing(false);
   }
 
+  function cycleItem(item: ListItem) {
+    if (item.image) {
+      return (
+        <motion.img
+          key={item.id}
+          data-id={item.id}
+          src={item.image}
+          className={`w-full h-full object-cover rounded-2xl border-3 border-solid border-black ${
+            item.id === chosenItem?.id
+              ? 'shadow-[8px_8px_0px_rgba(0,0,0,1)]'
+              : ''
+          }`}
+          exit={{ opacity: 0 }}
+          layout={isChoosing ? false : true}
+          onClick={resetChosen}
+        />
+      );
+    }
+    return (
+      <motion.div
+        key={item.id}
+        data-id={item.id}
+        exit={{ opacity: 0 }}
+        layout={isChoosing ? false : true}
+        className="bg-blue-600 border-3 border-black rounded-md text-center text-xs flex justify-center items-center p-1 text-white w-full h-96 aspect-[1/1.4]"
+      >
+        {item?.title}
+      </motion.div>
+    );
+  }
+
   return (
     <div className="flex items-center sm:justify-center flex-col gap-14 sm:w-auto w-full">
       <section className="overflow-hidden rounded-md border-3 border-solid border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] flex justify-center items-center bg-green-400 sm:p-12 p-6 w-full">
@@ -97,23 +128,7 @@ export function Chooser({ list }: ChooserProps) {
           ref={slotRef}
           animate={controls}
         >
-          <AnimatePresence>
-            {cycleList.map((item) => (
-              <motion.img
-                key={item.id}
-                data-id={item.id}
-                src={item.image}
-                className={`w-full h-full object-cover rounded-2xl border-3 border-solid border-black ${
-                  item.id === chosenItem?.id
-                    ? 'shadow-[8px_8px_0px_rgba(0,0,0,1)]'
-                    : ''
-                }`}
-                exit={{ opacity: 0 }}
-                layout={isChoosing ? false : true}
-                onClick={resetChosen}
-              />
-            ))}
-          </AnimatePresence>
+          <AnimatePresence>{cycleList.map(cycleItem)}</AnimatePresence>
         </motion.div>
       </section>
       <Button className="w-full" onClick={roll} disabled={list.length < 2}>
